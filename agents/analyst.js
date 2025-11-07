@@ -4,14 +4,14 @@ import inputPrompt from "../prompts/analyst_input.js";
 import feedbackPrompt from "../prompts/analyst_feedback.js";
 
 export default class Analyst {
-    static async designTestCases(inputs, previousTestCase = null, feedback = null, maxTestCases = process.env.DEFAULT_MAX_TEST_CASES) {
+    static async designTestCases(input, previousTestCase = null, feedback = null, maxTestCases = process.env.DEFAULT_MAX_TEST_CASES) {
         const model = gemini.instance;
 
         const filledRolePrompt = await rolePrompt.format({
             MAX_TEST_CASES: maxTestCases,
         });
         let filledPrompt = await inputPrompt.format({
-            inputList: inputs.map(item => item.label.trim()).join("\n"),
+            input: input.trim(),
         });
 
         if (previousTestCase && feedback) {

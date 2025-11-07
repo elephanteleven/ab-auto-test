@@ -8,7 +8,7 @@ export default new PromptTemplate({
         Redirect to the given URL: {url}\n
         Here are the test cases to write automated test scripts for:\n{message}
         Use this to map between label of input fields and their HTML element selectors. For NAME attribute, use '[name="NAME_VALUE"]':\n
-        {inputs}
+        {input}
     `,
-    inputVariables: ["url", "message", "inputs"],
+    inputVariables: ["url", "message", "input"],
 });

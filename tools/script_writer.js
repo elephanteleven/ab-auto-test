@@ -1,18 +1,19 @@
 import fs from "fs";
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 export default class ScriptWriter {
-    constructor(fileName) {
+    constructor(fileName, pathDir) {
         this._fileName = fileName;
+        this._pathDir = pathDir;
     }
 
     async writeScript(script) {
         return new Promise((resolve, reject) => {
-            const filePath = `${__dirname}/../${process.env.CYPRESS_FOLDER_PATH_NAME}/${this._fileName}`;
+            const filePath = path.join(this._pathDir, this._fileName) || `${__dirname}/../${process.env.CYPRESS_FOLDER_PATH_NAME}/${this._fileName}`;
 
             fs.appendFile(
                 filePath,
